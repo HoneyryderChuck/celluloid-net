@@ -342,9 +342,9 @@ module Net
 
       if @options.has_key?("Proxy")
         if @options["Proxy"].kind_of?(::Net::Telnet)
-          @sock = @options["Proxy"].sock
+          @sock = Celluloid::IO::TCPSocket.new(@options["Proxy"].sock)
         elsif @options["Proxy"].kind_of?(::IO)
-          @sock = @options["Proxy"]
+          @sock = Celluloid::IO::TCPSocket.new(@options["Proxy"])
         else
           raise "Error: Proxy must be an instance of Net::Telnet or IO."
         end

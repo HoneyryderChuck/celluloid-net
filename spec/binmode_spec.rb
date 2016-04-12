@@ -4,8 +4,11 @@ RSpec.describe Celluloid::Net::Telnet do
   let(:socket) { double("Telnet Socket") }
   let(:telnet) { Celluloid::Net::Telnet.new("Proxy" => socket) }
   before(:each) do
-    allow(socket).to receive(:kind_of?).with(IO).and_return(true)
+    allow(Celluloid::IO::TCPSocket).to receive(:new).with(socket).and_return(socket)
+
+    allow(socket).to receive(:kind_of?).with(::IO).and_return(true)
     allow(socket).to receive(:kind_of?).with(Net::Telnet).and_return(false)
+    allow(socket).to receive(:kind_of?).with(Celluloid::Net::Telnet).and_return(false)
   end
 
   describe "Celluloid::Net::Telnet#binmode when passed no arguments or nil" do
