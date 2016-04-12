@@ -21,9 +21,18 @@ require 'net/telnet'
   end
 end
 
-
-
 module Celluloid
+  module TelnetExtensions
+    def new(*args)
+      if Celluloid::IO.evented?
+        Net::Telnet.new(*args)
+      else
+        super
+      end
+    end
+  end
+
+
 module Net
 
   #
@@ -807,3 +816,5 @@ module Net
 end  # module Net
 end  # module Celluloid
 
+
+Net::Telnet.extend Celluloid::TelnetExtensions

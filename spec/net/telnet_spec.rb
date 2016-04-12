@@ -1,4 +1,5 @@
-require_relative '../lib/celluloid/net/telnet'
+require 'spec_helper'
+require 'celluloid/net/telnet'
 
 RSpec.describe Celluloid::Net::Telnet do
   let(:socket) { double("Telnet Socket") }
@@ -9,6 +10,12 @@ RSpec.describe Celluloid::Net::Telnet do
     allow(socket).to receive(:kind_of?).with(::IO).and_return(true)
     allow(socket).to receive(:kind_of?).with(Net::Telnet).and_return(false)
     allow(socket).to receive(:kind_of?).with(Celluloid::Net::Telnet).and_return(false)
+  end
+
+  it "is the celluloid wrapper within the evented scenario" do
+    within_io_actor do
+      expect(::Net::Telnet.new("Proxy" => socket)).to be_a(Celluloid::Net::Telnet)
+    end
   end
 
   describe "Celluloid::Net::Telnet#binmode when passed no arguments or nil" do
