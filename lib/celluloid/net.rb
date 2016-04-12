@@ -1,0 +1,1 @@
+require 'celluloid/net/version'

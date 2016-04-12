@@ -1,0 +1,15 @@
+/coverage/
+/doc/
+/pkg/
+/tmp/
+/log/
+/.yardoc/
+/.bundle
+/Gemfile.lock
+/vendor
+.env
+/man
+
+*.DS_Store
+*.sw[po]
+*.nfs*
