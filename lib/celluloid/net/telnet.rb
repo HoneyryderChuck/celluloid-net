@@ -12,14 +12,9 @@
 #
 
 require 'net/telnet'
-
-%w(timeout/extensions celluloid/io).each do |dep|
-  begin
-    require dep
-  rescue LoadError
-    raise %Q{could not require #{dep}, please add it to your Gemfile.}
-  end
-end
+require 'timeout/extensions'
+require 'celluloid/io'
+require 'celluloid/net/timeout'
 
 module Celluloid
   module TelnetExtensions

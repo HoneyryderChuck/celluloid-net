@@ -1,5 +1,6 @@
 require 'timeout/extensions'
 require 'celluloid/io'
+require 'celluloid/net/timeout'
 require 'net/ftp'
 
 module Celluloid::FTPExtensions

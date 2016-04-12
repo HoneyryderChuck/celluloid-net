@@ -1,5 +1,6 @@
 require 'timeout/extensions'
 require 'celluloid/io'
+require 'celluloid/net/timeout'
 require 'net/smtp'
 
 module Celluloid
